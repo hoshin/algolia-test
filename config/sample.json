@@ -1,0 +1,6 @@
+{
+  "algolia":{
+    "accountId": "<acc. ID>",
+    "privateKey": "<private key>"
+  }
+}
