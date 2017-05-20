@@ -1,12 +1,9 @@
 import express from 'express'
 import path from 'path'
-import favicon from 'serve-favicon'
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import sassMiddleware from 'node-sass-middleware'
-
-import index from './routes/index'
 import apps from './routes/apps'
 
 const app = express();
@@ -29,8 +26,13 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/api/1/apps', apps);
+
+app.all('/', (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>  {

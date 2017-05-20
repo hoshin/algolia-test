@@ -1,6 +1,6 @@
 import { assert } from 'chai'
 import sinon from 'sinon'
-import AppController from '../controllers/app'
+import AppController from '../controllers/appStore'
 
 describe('App Controller', () => {
   let appController

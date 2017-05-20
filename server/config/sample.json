@@ -1,0 +1,7 @@
+{
+  "algolia":{
+    "accountId": "<acc. ID>",
+    "privateKey": "<private key>",
+    "indexName": "<index available for account>"
+  }
+}
