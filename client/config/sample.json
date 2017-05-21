@@ -1,7 +1,7 @@
 {
   "algolia":{
-    "appId":"",
-    "apiKey":"",
-    "indexName":""
+    "appId":"<acc. ID>",
+    "apiKey":"<PUBLIC key>",
+    "indexName":"<index available for account>"
   }
 }
