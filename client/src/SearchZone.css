@@ -1,0 +1,16 @@
+.hit {
+  margin:1px;
+}
+
+#hitsContainer {
+  margin:15px 7px;
+  height:100%;
+}
+
+.hit-name, .hit-category-breadcrumb {
+  text-align:left;
+}
+
+.ais-hits--item {
+  margin: 4px 0 4px 0;
+}

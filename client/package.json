@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "inferno": "^3.2.0",
+    "inferno-component": "^3.2.0",
+    "instantsearch.js": "^1.11.11"
+  },
+  "devDependencies": {
+    "inferno-scripts": "3.0.0"
+  },
+  "scripts": {
+    "start": "PORT=3001 inferno-scripts start",
+    "build": "inferno-scripts build",
+    "test": "inferno-scripts test --env=jsdom",
+    "eject": "inferno-scripts eject"
+  }
+}
