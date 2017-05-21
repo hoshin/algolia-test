@@ -3,13 +3,12 @@ import AppStoreController from '../controllers/appStore'
 const router = express.Router()
 const appStoreController = new AppStoreController()
 
-router.post('/', (req, res) =>  {
+router.post('/', (req, res) => {
   appStoreController.postNewItem(req.body, res)
-});
+})
 
-
-router.delete('/:recordId', (req, res) =>  {
+router.delete('/:recordId', (req, res) => {
   appStoreController.deleteItem(req.params.recordId, res)
-});
+})
 
-module.exports = router;
+module.exports = router
