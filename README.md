@@ -44,7 +44,7 @@ A couple of things to know beforehand :
 * The client won't start without that file.
 * As the services provided are purely for reading data (and because, it'll be included in the JS sent to browsers), you should probably use the public API key for your index rather than the private one (which is probably a hazard)
 
-### Starting the server
+### Starting the client
 
 Once modules are installed, the server can be run two ways : 
 
