@@ -1,12 +1,14 @@
 {
   "name": "algolia-test",
   "version": "0.0.0",
+  "description": "Algolia test (server side)",
+  "main": "./bin/www",
   "private": true,
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --recursive ./test ",
     "start": "babel-node ./bin/www",
     "lint": "./node_modules/.bin/eslint --ignore-pattern=qualimetry .",
-    "coverage": "istanbul cover _mocha --dir qualimetry/coverage -- --compilers js:babel-core/register -R spec --recursive"
+    "coverage": "istanbul cover _mocha --dir qualimetry/coverage -- --compilers js:babel-core/register -R spec --recursive ./test"
   },
   "dependencies": {
     "algoliasearch": "^3.22.2",
@@ -22,6 +24,8 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-plugin-promise": "^3.5.0",
@@ -29,7 +33,7 @@
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
-    "istanbul": "^0.4.5",
+    "istanbul": "^1.0.0-alpha.2",
     "mocha": "^3.4.1",
     "sinon": "^2.2.0"
   }
