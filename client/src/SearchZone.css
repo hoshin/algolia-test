@@ -1,6 +1,51 @@
 .hit {
   margin:1px;
 }
+#hit-template {
+  position:static;
+}
+
+.hit.item {
+  position:relative;
+}
+
+.hit.item .image {
+  float:left;
+  vertical-align: middle;
+}
+
+.image img {
+  margin-top:5px;
+  margin-right:5px;
+}
+
+.content div .category {
+  color:#969696;
+  font-style: italic;
+}
+
+#searchZone {
+  position:relative;
+}
+
+.menu {
+  float:left;
+  width:15%;
+}
+
+.results {
+  margin-left: 20%;
+  width:80%
+}
+
+.categoryCount{
+  float:right;
+  color:#969696;
+}
+
+.categoryName{
+  font-weight:700;
+}
 
 #hitsContainer {
   margin:15px 7px;
@@ -13,4 +58,21 @@
 
 .ais-hits--item {
   margin: 4px 0 4px 0;
+  position:relative;
+}
+.ais-pagination--item__active {
+  background-color:#00B7FF;
+}
+
+.ais-pagination--item__active a {
+  color:white;
+  text-decoration:none;
+}
+
+.ais-pagination {
+  text-align:center;
+}
+
+#search-input, #searchBarContainer, .ais-search-box--input {
+  width:100%;
 }

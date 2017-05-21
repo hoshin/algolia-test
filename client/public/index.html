@@ -16,19 +16,22 @@
 <body>
 <div id="app"></div>
 <script type="text/html" id="hit-template">
-    <div class="hit ui card">
-        <div class="content">
-            <img class="right floated mini ui image" src="{{image}}">
-            <a href="{{link}}" target="_blank">
-                <div class="header">{{{_highlightResult.name.value}}}</div>
-                <div class="meta">{{{category}}}</div>
-            </a>
+    <div class="hit item">
+        <div class="image">
+            <img src="{{image}}">
         </div>
-        <div class="extra content">
-            <span class="right floated">
-                <i class="line chart icon"></i>
-                Rank : {{{rank}}}
-            </span>
+        <div class="content">
+            <div>
+                <a href="{{link}}" class="header" target="_blank">
+                    {{{_highlightResult.name.value}}}
+                </a>
+            </div>
+            <div class="item-footer">
+                <span class="category">{{{category}}}</span>
+                <span class="rank">
+                    <i class="line chart icon"></i>{{{rank}}}
+                </span>
+            </div>
         </div>
     </div>
 </script>
