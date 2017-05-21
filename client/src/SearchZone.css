@@ -17,6 +17,8 @@
 .image img {
   margin-top:5px;
   margin-right:5px;
+  width:24px;
+  height:24px;
 }
 
 .content div .category {
@@ -50,6 +52,7 @@
 #hitsContainer {
   margin:15px 7px;
   height:100%;
+  border-bottom:1px solid #e9e9e9;
 }
 
 .hit-name, .hit-category-breadcrumb {
@@ -75,4 +78,41 @@
 
 #search-input, #searchBarContainer, .ais-search-box--input {
   width:100%;
+}
+.ais-sort-by-selector:focus, .ais-sort-by-selector:active, .ais-sort-by-selector:hover, .ais-sort-by-selector:link {
+  text-decoration:none;
+}
+.ais-sort-by-selector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('https://storage.googleapis.com/support-kms-prod/SNP_B5A5E5520D8D27C2E9A549A33BF906E8FC82_3513634_en_v0');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-shadow: none;
+  min-width: 200px;
+  outline-color: rgba(0, 0, 0, 0.87);
+  outline-style: none;
+  outline-width: 0px;
+}
+
+.options {
+  margin-top:5px;
+  width:100%;
+  position:relative;
+}
+
+.options #statsContainer{
+  width:25%;
+  float:left;
+}
+
+.options #sortContainer{
+  width:50%;
+}
+
+.searchbox.sbx-sffv {
+  margin-bottom:5px;
 }

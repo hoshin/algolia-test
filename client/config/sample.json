@@ -1,0 +1,7 @@
+{
+  "algolia":{
+    "appId":"",
+    "apiKey":"",
+    "indexName":""
+  }
+}

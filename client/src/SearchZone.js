@@ -30,8 +30,26 @@ class SearchBar extends Component {
     this.addStatsWidget()
     this.addPaginationWidget()
     this.addRefinementWidget()
+    this.addSortWidget()
 
     this.search.start()
+  }
+
+  addSortWidget () {
+    this.sortContainer = this.createContainingDivForWidget('sort')
+    this.search.addWidget(
+        instantsearch.widgets.sortBySelector({
+          container: this.sortContainer,
+          autoHideContainer: true,
+          indices: [{
+            name: config.algolia.indexName, label: 'Most relevant',
+          }, {
+            name: `${config.algolia.indexName}_rank_asc`, label: 'Lowest rank first',
+          }, {
+            name: `${config.algolia.indexName}_rank_desc`, label: 'Highest rank first',
+          }],
+        })
+    );
   }
 
   addRefinementWidget () {
@@ -112,6 +130,7 @@ class SearchBar extends Component {
     document.getElementById('statsContainer').appendChild(this.statsContainer)
     document.getElementById('paginationContainer').appendChild(this.paginationContainer)
     document.getElementById('refinementContainer').appendChild(this.refinementContainer)
+    document.getElementById('sortContainer').appendChild(this.sortContainer)
   }
 
   render () {
@@ -124,7 +143,10 @@ class SearchBar extends Component {
             <div id="searchBarContainer" className="ui right icon input">
               <i class="search icon"></i>
             </div>
-            <div id="statsContainer"></div>
+            <div class="options">
+              <div id="statsContainer"></div>
+              <div id="sortContainer" className="ui dropdown"></div>
+            </div>
             <div id="hitsContainer" className="ui items"></div>
             <div id="paginationContainer"></div>
           </div>
