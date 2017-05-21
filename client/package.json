@@ -1,6 +1,7 @@
 {
   "name": "test",
   "version": "0.1.0",
+  "description": "Algolia test (client side)",
   "private": true,
   "dependencies": {
     "inferno": "^3.2.0",
