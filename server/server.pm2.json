@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "algolia-server",
+      "script": "./bin/www",
+      "exec_interpreter" : "./node_modules/.bin/babel-node",
+      "node_args":"--harmony",
+      "env":{
+        "PORT":3000,
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

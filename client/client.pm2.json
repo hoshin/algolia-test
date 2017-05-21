@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "algolia-client",
+      "script": "./src/index.js",
+      "exec_interpreter" : "./node_modules/.bin/inferno-scripts",
+      "node_args":"start",
+      "env":{
+        "PORT":3001,
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
