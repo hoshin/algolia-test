@@ -58,7 +58,7 @@ class SearchZone extends Component {
           <div className="results">
             <SearchBar onChangeHandler={this.onkeyupHandler.bind(this)}/>
             <div className="options">
-              <ResultsSorter sortHandler={this.sortHandler.bind(this)}/>
+              {this.state.searchResults.nbHits > 0? <ResultsSorter sortHandler={this.sortHandler.bind(this)}/> : null}
               <Stats stats={{nbHits:this.state.searchResults.nbHits, time:this.state.searchResults.processingTimeMS}}/>
             </div>
             <div style="clear:both"/>
