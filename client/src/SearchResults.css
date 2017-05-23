@@ -1,0 +1,34 @@
+.hit {
+    margin:1px;
+}
+
+.hit.item {
+    position:relative;
+}
+
+.hit.item .image {
+    float:left;
+    vertical-align: middle;
+}
+
+.hit-name, .hit-category-breadcrumb {
+    text-align:left;
+}
+
+.image img {
+    margin-top:5px;
+    margin-right:5px;
+    width:24px;
+    height:24px;
+}
+
+#hitsContainer {
+    margin:15px 7px;
+    height:100%;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.ais-hits--item {
+    margin: 4px 0 4px 0;
+    position:relative;
+}

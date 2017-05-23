@@ -1,158 +1,71 @@
 import Component from 'inferno-component'
-import instantsearch from 'instantsearch.js/dist/instantsearch.js'
+import algoliasearch from 'algoliasearch'
+import algoliasearchHelper from 'algoliasearch-helper'
 import config from '../config/base'
+import SearchBar from './SearchBar'
+import SearchResults from './SearchResults'
+import Stats from './Stats'
+import SearchPagination from './SearchPagination'
+import ResultsSorter from './ResultsSorter'
+import Refinements from './Refinements'
+import $ from 'jquery'
 import './SearchZone.css'
 
-class SearchBar extends Component {
+class SearchZone extends Component {
   constructor () {
     super()
-    this.search = instantsearch({
-      appId: config.algolia.appId,
-      apiKey: config.algolia.apiKey,
-      indexName: config.algolia.indexName,
-      urlSync: true
+    this.client = algoliasearch(config.algolia.appId, config.algolia.apiKey)
+    this.helper = algoliasearchHelper(this.client, config.algolia.indexName, {
+      disjunctiveFacets: ['category'],
+      hitsPerPage: 10
     })
+    this.state = {searchResults:[]};
+    this.helper.on('result', (content) => {
+      this.setState({searchResults:content})
+    })
+    this.helper.setQuery("")
+    this.helper.search()
   }
 
-  getTemplate (templateName) {
-    return document.getElementById(`${templateName}-template`).innerHTML
+  onkeyupHandler() {
+    this.helper.setQuery($("#searchBarContainer input").val()).search();
   }
 
-  createContainingDivForWidget (containerId) {
-    const container = document.createElement('div')
-    container.setAttribute('id', containerId)
-    return container
+  changePageHandler(pageNumber) {
+    this.helper.setPage(pageNumber).search()
   }
 
-  componentWillMount () {
-    this.addSearchBarWidget()
-    this.addHitsWidget()
-    this.addStatsWidget()
-    this.addPaginationWidget()
-    this.addRefinementWidget()
-    this.addSortWidget()
-
-    this.search.start()
+  sortHandler(sortPreference) {
+    this.helper.setIndex(sortPreference).search()
   }
 
-  addSortWidget () {
-    this.sortContainer = this.createContainingDivForWidget('sort')
-    this.search.addWidget(
-        instantsearch.widgets.sortBySelector({
-          container: this.sortContainer,
-          autoHideContainer: true,
-          indices: [{
-            name: config.algolia.indexName, label: 'Most relevant',
-          }, {
-            name: `${config.algolia.indexName}_rank_asc`, label: 'Lowest rank first',
-          }, {
-            name: `${config.algolia.indexName}_rank_desc`, label: 'Highest rank first',
-          }],
-        })
-    );
-  }
-
-  addRefinementWidget () {
-    this.refinementContainer = this.createContainingDivForWidget('refinement')
-    this.search.addWidget(
-        instantsearch.widgets.refinementList({
-          container: this.refinementContainer,
-          attributeName: 'category',
-          sortBy: ['isRefined', 'count:desc', 'name:asc'],
-          limit: 5,
-          operator: 'or',
-          showMore: {
-            limit: 10,
-          },
-          searchForFacetValues: {
-            placeholder: 'Search for categories',
-            templates: {
-              noResults: '<div class="sffv_no-results">No matching categories.</div>'
-            },
-          },
-          templates: {
-            header: '<h5>Category filter</h5>'
-          },
-          collapsible: {
-            collapsed: false,
-          },
-        })
-    )
-  }
-
-  addPaginationWidget () {
-    this.paginationContainer = this.createContainingDivForWidget('pagination')
-    this.search.addWidget(
-        instantsearch.widgets.pagination({
-          container: this.paginationContainer,
-          scrollTo: this.searchInputContainer
-        })
-    )
-  }
-
-  addStatsWidget () {
-    this.statsContainer = this.createContainingDivForWidget('stats')
-    this.search.addWidget(
-        instantsearch.widgets.stats({
-          container: this.statsContainer,
-        })
-    )
-  }
-
-  addHitsWidget () {
-    this.hitsContainer = this.createContainingDivForWidget('hits')
-    this.search.addWidget(
-        instantsearch.widgets.hits({
-          container: this.hitsContainer,
-          hitsPerPage: 10,
-          templates: {
-            item: this.getTemplate('hit'),
-            empty: this.getTemplate('no-results'),
-          }
-        })
-    )
-  }
-
-  addSearchBarWidget () {
-    this.searchInputContainer = this.createContainingDivForWidget('search-input')
-
-    this.search.addWidget(
-        instantsearch.widgets.searchBox({
-          container: this.searchInputContainer,
-          placeholder: 'Search for apps'
-        })
-    )
-  }
-
-  componentDidMount () {
-    document.getElementById('searchBarContainer').appendChild(this.searchInputContainer)
-    document.getElementById('hitsContainer').appendChild(this.hitsContainer)
-    document.getElementById('statsContainer').appendChild(this.statsContainer)
-    document.getElementById('paginationContainer').appendChild(this.paginationContainer)
-    document.getElementById('refinementContainer').appendChild(this.refinementContainer)
-    document.getElementById('sortContainer').appendChild(this.sortContainer)
+  refinementHandler(refinementToToggle){
+    this.helper.toggleRefine('category', refinementToToggle).search()
   }
 
   render () {
+    let refinements = this.state.searchResults._rawResults? Object.keys(this.state.searchResults._rawResults[0].facets.category) : [];
     return (
         <div id="searchZone">
           <div class="menu">
-            <div id="refinementContainer"></div>
+            <Refinements
+                toggleRefinementHandler={this.refinementHandler.bind(this)}
+                categories={this.state.searchResults.disjunctiveFacets? this.state.searchResults.disjunctiveFacets[0].data : []}
+                activeRefinements={refinements}
+            />
           </div>
           <div class="results">
-            <div id="searchBarContainer" className="ui right icon input">
-              <i class="search icon"></i>
-            </div>
+            <SearchBar onChangeHandler={this.onkeyupHandler.bind(this)}/>
             <div class="options">
-              <div id="statsContainer"></div>
-              <div id="sortContainer" className="ui dropdown"></div>
+              <Stats id="statsContainer" stats={{nbHits:this.state.searchResults.nbHits, time:this.state.searchResults.processingTimeMS}}/>
+              <ResultsSorter sortHandler={this.sortHandler.bind(this)}/>
             </div>
-            <div id="hitsContainer" className="ui items"></div>
-            <div id="paginationContainer"></div>
+            <SearchResults className="ui items" hits={this.state.searchResults.hits} />
+            <SearchPagination id="paginationContainer" currentPage={this.state.searchResults.page} maxPages={this.state.searchResults.nbPages} changePage={this.changePageHandler.bind(this)}/>
           </div>
         </div>
     )
   }
 }
 
-export default SearchBar
+export default SearchZone

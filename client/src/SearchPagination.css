@@ -1,0 +1,13 @@
+
+.ais-pagination--item__active {
+    background-color:#00B7FF;
+}
+
+.ais-pagination--item__active a {
+    color:white;
+    text-decoration:none;
+}
+
+.ais-pagination {
+    text-align:center;
+}

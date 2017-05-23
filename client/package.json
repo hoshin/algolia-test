@@ -4,9 +4,11 @@
   "description": "Algolia test (client side)",
   "private": true,
   "dependencies": {
+    "algoliasearch": "^3.22.2",
+    "algoliasearch-helper": "^2.20.1",
     "inferno": "^3.2.0",
     "inferno-component": "^3.2.0",
-    "instantsearch.js": "^1.11.11"
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
