@@ -1,4 +1,6 @@
-.options #statsContainer{
-  width:25%;
-  float:left;
+#statsContainer{
+  width:50%;
+  font-size:0.85em;
+  float:right;
+  text-align: right;
 }

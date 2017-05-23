@@ -6,7 +6,11 @@ class Stats extends Component {
   render() {
     return (
         <div id="statsContainer">
-          Found <b>{this.props.stats.nbHits}</b> items in {this.props.stats.time} ms
+          <div className="inline field">
+            <div className="ui">
+              <b>{this.props.stats.nbHits}</b> item(s) found in {this.props.stats.time} ms
+            </div>
+          </div>
         </div>
     );
   }

@@ -58,11 +58,12 @@ class SearchZone extends Component {
           <div className="results">
             <SearchBar onChangeHandler={this.onkeyupHandler.bind(this)}/>
             <div className="options">
-              <Stats id="statsContainer" stats={{nbHits:this.state.searchResults.nbHits, time:this.state.searchResults.processingTimeMS}}/>
               <ResultsSorter sortHandler={this.sortHandler.bind(this)}/>
+              <Stats stats={{nbHits:this.state.searchResults.nbHits, time:this.state.searchResults.processingTimeMS}}/>
             </div>
+            <div style="clear:both"/>
             <SearchResults className="ui items" hits={this.state.searchResults.hits} />
-            <SearchPagination id="paginationContainer" currentPage={this.state.searchResults.page} maxPages={this.state.searchResults.nbPages} changePage={this.changePageHandler.bind(this)}/>
+            <SearchPagination currentPage={this.state.searchResults.page} maxPages={this.state.searchResults.nbPages} changePage={this.changePageHandler.bind(this)}/>
           </div>
         </div>
     )
