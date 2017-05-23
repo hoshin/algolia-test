@@ -26,7 +26,7 @@ Once modules are installed, the server can be run two ways :
 
 ### What it does
 
-It is a sample application that does multiple "reading" tasks involving 5 different widgets (provided by [instantsearch.js](https://www.npmjs.com/package/instantsearch.js))
+It is a sample application that does multiple "reading" tasks using the Algolia JS helper (provided by [algoliasearch / algoliasearch-helper](https://community.algolia.com/algoliasearch-helper-js/))
 
 * Search Bar
 * Search Stats
@@ -34,7 +34,7 @@ It is a sample application that does multiple "reading" tasks involving 5 differ
 * Hits list
 * Refinement list
 
-It then tries to present the results as nicely as possible with some help from [semantic.ui](https://semantic-ui.com/) (even though it's not as simple in the end as `instantsearch.js` creates some DOM on the fly, which seems to confuse semantic a bit)
+It then tries to present the results as nicely as possible with some help from [semantic.ui](https://semantic-ui.com/)
 
 ### Configuration
 The server first needs to be configured, this is done through the `./client/config/base.json` file (there is a sample file in `./client/config/` that can just be renamed and filled in with the appropriate credentials). 
