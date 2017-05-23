@@ -8,7 +8,6 @@ import Stats from './Stats'
 import SearchPagination from './SearchPagination'
 import ResultsSorter from './ResultsSorter'
 import Refinements from './Refinements'
-import $ from 'jquery'
 import './SearchZone.css'
 
 class SearchZone extends Component {
@@ -28,7 +27,7 @@ class SearchZone extends Component {
   }
 
   onkeyupHandler() {
-    this.helper.setQuery($("#searchBarContainer input").val()).search();
+    this.helper.setQuery(document.getElementById("searchBarInput").value).search();
   }
 
   changePageHandler(pageNumber) {
