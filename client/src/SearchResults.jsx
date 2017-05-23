@@ -29,7 +29,7 @@ class SearchResults extends Component {
   render() {
     return (
         <div id="hitsContainer" className="SearchResults">
-          {this.props.hits? this.createResultsPage(this.props.hits) : 'No matches to show'}
+          {this.props.hits && this.props.hits.length? this.createResultsPage(this.props.hits) : 'No matches to show'}
         </div>
     );
   }
