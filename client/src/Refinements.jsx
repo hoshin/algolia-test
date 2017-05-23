@@ -15,10 +15,10 @@ class SearchResults extends Component {
     this.props.toggleRefinementHandler(e.currentTarget.getAttribute('value'))
   }
 
-  checkmarkIfSelectedCategories(actualRefining){
+  checkmarkIfSelectedCategories (actualRefining) {
     let checkmark = null
-    if(actualRefining){
-      checkmark = <i className="icon check"/>
+    if (actualRefining) {
+      checkmark = <i className="icon check" />
     }
     return checkmark
   }
@@ -26,6 +26,9 @@ class SearchResults extends Component {
   createRefinementsMenu () {
     const categories = this.props.categories
     const allCategories = Object.keys(categories)
+    if (allCategories.length < 1) {
+      return (<span>No categories to show</span>)
+    }
     const actualRefining = this.props.activeRefinements.length < allCategories.length
 
     const inactiveRefinements = allCategories.filter(category => {
@@ -37,24 +40,26 @@ class SearchResults extends Component {
       return (
           <div>
             {this.checkmarkIfSelectedCategories(actualRefining)}
-            <a href="#" onClick={this.toggleRefinement.bind(this)} id={`cat_${refinement}`} value={refinement} >{refinement} ({categories[refinement]})</a>
+            <a href="#" onClick={this.toggleRefinement.bind(this)} id={`cat_${refinement}`}
+               value={refinement}>{refinement} ({categories[refinement]})</a>
           </div>
       )
     })
 
     let bottom = []
-    if(actualRefining){
+    if (actualRefining) {
       bottom = inactiveRefinements.map(refinement => {
         return (
             <div>
-              <a href="#" onClick={this.toggleRefinement.bind(this)} id={`cat_${refinement}`} value={refinement} >{refinement} ({categories[refinement]})</a>
+              <a href="#" onClick={this.toggleRefinement.bind(this)} id={`cat_${refinement}`}
+                 value={refinement}>{refinement} ({categories[refinement]})</a>
             </div>
         )
       })
     }
 
-    if(top.length && bottom.length){
-      top.push(<div className="separator"/>)
+    if (top.length && bottom.length) {
+      top.push(<div className="separator" />)
     }
 
     let result = top.concat(bottom)
@@ -69,14 +74,18 @@ class SearchResults extends Component {
   }
 
   showToggle () {
-    let showButton = (<div>
-      <a href="#" onClick={this.toggleShownCategories.bind(this)}><i className="icon plus"/> </a>
-    </div>)
-    if (this.state.showAll) {
+    let showButton = null
+    if (Object.keys(this.props.categories).length > 0) {
       showButton = (<div>
-        <a href="#" onClick={this.toggleShownCategories.bind(this)}><i className="icon minus"/></a>
+        <a href="#" onClick={this.toggleShownCategories.bind(this)}><i className="icon plus" /> </a>
       </div>)
+      if (this.state.showAll) {
+        showButton = (<div>
+          <a href="#" onClick={this.toggleShownCategories.bind(this)}><i className="icon minus" /></a>
+        </div>)
+      }
     }
+
     return showButton
   }
 
