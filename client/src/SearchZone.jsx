@@ -43,19 +43,21 @@ class SearchZone extends Component {
   }
 
   render () {
-    let refinements = this.state.searchResults._rawResults? Object.keys(this.state.searchResults._rawResults[0].facets.category) : [];
+    let rawResults = this.state.searchResults._rawResults
+    let refinements = rawResults && rawResults[0].facets.category? Object.keys(rawResults[0].facets.category) : []
+    let categoriesAvailable = this.state.searchResults.disjunctiveFacets
     return (
         <div id="searchZone">
-          <div class="menu">
+          <div className="menu">
             <Refinements
                 toggleRefinementHandler={this.refinementHandler.bind(this)}
-                categories={this.state.searchResults.disjunctiveFacets? this.state.searchResults.disjunctiveFacets[0].data : []}
+                categories={categoriesAvailable && categoriesAvailable[0]? categoriesAvailable[0].data : []}
                 activeRefinements={refinements}
             />
           </div>
-          <div class="results">
+          <div className="results">
             <SearchBar onChangeHandler={this.onkeyupHandler.bind(this)}/>
-            <div class="options">
+            <div className="options">
               <Stats id="statsContainer" stats={{nbHits:this.state.searchResults.nbHits, time:this.state.searchResults.processingTimeMS}}/>
               <ResultsSorter sortHandler={this.sortHandler.bind(this)}/>
             </div>
