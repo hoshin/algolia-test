@@ -1,6 +1,5 @@
 # Algolia test
-The purpose of this piece of code is to fiddle around w/ the Algolia API as described [here](https://gist.github.com/vvo/f3d59911e547bbea98e0ac8bd1b3bd89)
-
+The purpose of this piece of code is to fiddle around w/ the Algolia API
 ## The server
 
 ### What it does
