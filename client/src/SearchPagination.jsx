@@ -90,15 +90,24 @@ class SearchBar extends Component {
 
   render () {
     return (
-        <ul className="ais-pagination">
-          {this.addPrecedingPages(this.props.currentPage)}
-          <li className="ais-pagination--item ais-pagination--item__page ais-pagination--item__active"><a
-              className="ais-pagination--link" aria-label={this.props.currentPage}
-              href="#">{this.props.currentPage + 1}</a>
-          </li>
-          {this.addFollowingPages(this.props.currentPage, this.props.maxPages)}
-        </ul>
+        this.displayPaginationIfNeeded()
     )
+  }
+
+  displayPaginationIfNeeded () {
+    let pagination = null
+    if(this.props.maxPages > 0){
+      pagination = <ul className="ais-pagination">
+        {this.addPrecedingPages(this.props.currentPage)}
+        <li className="ais-pagination--item ais-pagination--item__page ais-pagination--item__active"><a
+            className="ais-pagination--link" aria-label={this.props.currentPage}
+            href="#">{this.props.currentPage + 1}</a>
+        </li>
+        {this.addFollowingPages(this.props.currentPage, this.props.maxPages)}
+      </ul>
+    }
+
+    return pagination;
   }
 }
 
