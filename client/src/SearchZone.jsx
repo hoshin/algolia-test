@@ -61,7 +61,7 @@ class SearchZone extends Component {
               {this.state.searchResults.nbHits > 0? <ResultsSorter sortHandler={this.sortHandler.bind(this)}/> : null}
               <Stats stats={{nbHits:this.state.searchResults.nbHits, time:this.state.searchResults.processingTimeMS}}/>
             </div>
-            <div style="clear:both"/>
+            <div className="hitsSeparator"/>
             <SearchResults className="ui items" hits={this.state.searchResults.hits} />
             <SearchPagination currentPage={this.state.searchResults.page} maxPages={this.state.searchResults.nbPages} changePage={this.changePageHandler.bind(this)}/>
           </div>
